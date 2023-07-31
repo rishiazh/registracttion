@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      box-sizing: border-box;
+      padding: 5%;
+      background:rgb(103, 141, 141);
+    }
+    
+    .container {
+      width: 400px;
+      margin: 0 auto; 
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+     background-color: aliceblue;
+    }
+    
+    .container H2{
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .form-group input,
+    .form-group input[type="file"],
+    .form-group button {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+    
+    .form-group button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    
+    #profile-cards {
+      
+      margin-top: 20px;
+      background-color: aliceblue;
+      display: flex;
+      justify-content: space-evenly;
+    }
+    
+    .profile-card {
+      width: 200px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-left: 2px;
+      color: #002765;
+      width: 80%;
+      background-color: white;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      margin-bottom: 25px;
+    }
+    
+    .m {
+      display: flex;
+      justify-content: space-around;
+    }
+    
+    .profile-card img {
+      width: 50%;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      left: 10px;
+      position: relative;
+      z-index: 100;
+    }
+    
+    .profile-card p {
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+    
+    .pp {
+      display: none;
+      width: 400px;
+      margin: 0 auto;
+      margin-top: 10px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: aliceblue;
+    }
+    
+    .box {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: aliceblue;
+      display: flex;
+      justify-content: space-evenly;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="m">
+    <div class="container">
+      <h2>User Registration</h2>
+      <form id="f1">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" required placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="number" id="age" placeholder="Enter your age" required>
+        </div>
+        <div class="form-group">
+          <label for="contact">Contact:</label>
+          <input type="number" id="contact" placeholder="Enter your contact" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <textarea id="address" placeholder="Enter your address" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="picture">Profile Picture:</label>
+          <input type="file" id="picture">
+        </div>
+        <button onclick="addProfile()">Add Profile</button>
+      </form>
+    </div>
+    <div class="pp">
+      <h2>Registered Users</h2>
+      <div class="box">
+        <div id="profile-cards"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function addProfile() {
+      document.getElementsByClassName('pp')[0].style.display='block';
+      var email = document.getElementById('email').value;
+      var name = document.getElementById('name').value;
+      var age = document.getElementById('age').value;
+      var contact = document.getElementById('contact').value;
+      var address = document.getElementById('address').value;
+      var picture = document.getElementById('picture').files[0];
+      
+      if (name && email && age && contact && address) {
+        var profileCards = document.getElementById('profile-cards');
+        var profileCard = document.createElement('div');
+        profileCard.className = 'profile-card';
+        profileCards.appendChild(profileCard);
+        
+        var profilePicture = document.createElement('img');
+        profilePicture.src = URL.createObjectURL(picture);
+        profileCard.appendChild(profilePicture);
+        
+        var profileName = document.createElement('p');
+        profileName.textContent ='Name: '+ name;
+        profileCard.appendChild(profileName);
+        
+        var profileEmail = document.createElement('p');
+        profileEmail.textContent ='E-mail: '+ email;
+        profileCard.appendChild(profileEmail);
+        
+        var profileAge = document.createElement('p');
+        profileAge.textContent = 'Age: ' + age;
+        profileCard.appendChild(profileAge);
+        
+        var profileContact = document.createElement('p');
+        profileContact.textContent ='Contact: '+ contact;
+        profileCard.appendChild(profileContact);
+        
+        var profileAddress = document.createElement('p');
+        profileAddress.textContent ='Address: '+ address;
+        profileCard.appendChild(profileAddress);
+        
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('age').value = '';
+        document.getElementById('contact').value = '';
+        document.getElementById('address').value = '';
+        document.getElementById('picture').value = '';
+      }
+    }
+  </script>
+</body>
+</html>
